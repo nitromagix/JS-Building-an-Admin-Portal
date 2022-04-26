@@ -13,7 +13,13 @@ async function main() {
     app.use(bodyParser.json());
 
     app.get('/listBooks', async (req, res) => {
-        let books = await loadBooks()
+        let books = await loadBooks();
+        res.json(books);
+    })
+
+    app.get('/resetBooks', async (req, res) => {
+        let books = await loadBooksFromBackupDb();
+        await saveBooks(books);
         res.json(books);
     })
 
@@ -62,13 +68,19 @@ async function main() {
 }
 
 const DB_PATH = Path.join(__dirname, 'db.json')
+const DB_BACKUP_PATH = Path.join(__dirname, 'db.back.json')
 
-async function loadBooks() {
+const loadBooks = async () => {
     let { books } = JSON.parse(await Fs.readFile(DB_PATH))
-    return books
+    return books;
 }
 
-async function saveBooks(books) {
+const loadBooksFromBackupDb = async () => {
+    let { books } = JSON.parse(await Fs.readFile(DB_BACKUP_PATH))
+    return books;
+}
+
+const saveBooks = async (books) => {
     await Fs.writeFile(DB_PATH, JSON.stringify({ books }, null, 2))
 }
 

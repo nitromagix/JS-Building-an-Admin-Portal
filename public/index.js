@@ -1,12 +1,13 @@
-async function main() {
+// async function main()
+const main = async() => {
 
     let response = await fetch('http://localhost:3001/listBooks')
     let books = await response.json()
 
-    books.forEach(renderBook)
+    books.forEach(renderTitles)
 }
 
-function renderBook(book) {
+function renderTitles(book) {
     let bookContainer = document.querySelector('.book-container')
     bookContainer.innerHTML += `
         <div class="col-sm-3">
@@ -26,3 +27,4 @@ function renderBook(book) {
 }
 
 main()
+
