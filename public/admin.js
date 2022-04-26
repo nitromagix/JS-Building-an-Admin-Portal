@@ -29,13 +29,13 @@ const updateQuantity = async (id) => {
    }
 
    let patchResponse = await fetch('http://localhost:3001/updateBook', {
-      method : 'PATCH',
-      headers : {
+      method: 'PATCH',
+      headers: {
          'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-         "id" : id,
-         "quantity" : bookQuantity
+         "id": id,
+         "quantity": bookQuantity
       })
    });
    let updatedBook = await patchResponse.json();
@@ -44,7 +44,7 @@ const updateQuantity = async (id) => {
 
 const deleteBook = async (id) => {
    let deleteResponse = await fetch(`http://localhost:3001/removeBook/${id}`, {
-      method : 'DELETE'
+      method: 'DELETE'
    });
    let deleteResponseText = await deleteResponse.text();
    console.log(deleteResponseText);
@@ -73,27 +73,27 @@ const checkIfAllBooksDeleted = async () => {
    root.appendChild(addButton);
 }
 
-const reloadBooks = async() => {
-   let response = await fetch('http://localhost:3001/resetBooks',);
+const reloadBooks = async () => {
+   let response = await fetch('http://localhost:3001/resetBooks', );
    location.reload();
 }
 
 const addBook = async (book) => {
    let addResponse = await fetch('http://localhost:3001/addBook', {
-      method : 'POST',
+      method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
       credentials: 'same-origin',
-      headers : {
+      headers: {
          'Content-Type': 'application/json'
       },
-      body : JSON.stringify({
-         "id" : book.id,
-         "title" : book.title,
-         "year" : book.year,
-         "description" : book.description,
-         "quantity" : book.quantity,
-         "imageURL" : book.imageURL
+      body: JSON.stringify({
+         "id": book.id,
+         "title": book.title,
+         "year": book.year,
+         "description": book.description,
+         "quantity": book.quantity,
+         "imageURL": book.imageURL
       })
    });
    let addedBook = await addResponse.json();
